@@ -53,13 +53,14 @@ Article.fetchAll = function() {
     Article.loadAll(JSON.parse(localStorage.rawData)); //TODO: What do we pass in to loadAll()?
     //TODO: What method do we call to render the index page?
   } else {
-    // TODO: When we don't already have the rawData,
+    // DONE: When we don't already have the rawData,
     // we need to retrieve the JSON file from the server with AJAX (which jQuery method is best for this?),
     // cache it in localStorage so we can skip the server call next time,
     // then load all the data into Article.all with the .loadAll function above,
     // and then render the index page.
-    $.get('data/hackerIpsum.json', function(){
-      localStorage.rawData = 
+    $.get('data/hackerIpsum.json', function(data){
+      console.log(data);
+      localStorage.rawData = JSON.stringify(data);
     })
   }
 }
