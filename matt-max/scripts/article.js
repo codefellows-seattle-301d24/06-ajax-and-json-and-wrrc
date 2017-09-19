@@ -1,5 +1,7 @@
 'use strict';
 
+let rawData = [];
+
 function Article (rawDataObj) {
   this.author = rawDataObj.author;
   this.authorUrl = rawDataObj.authorUrl;
@@ -52,9 +54,13 @@ Article.fetchAll = function() {
     // and then render the index page (using the proper method on the articleView object).
     Article.loadAll(JSON.parse(localStorage.rawData)); //TODO: What do we pass in to loadAll()?
     //TODO: What method do we call to render the index page?
-    Article.toHtml();
+    articleView.initIndexPage();
   } else {
-    $.get('/data/hackerIpsum.json');
+    $.get('/data/hackerIpsum.json', function(response) {
+      localStorage.setItem('rawData', JSON.stringify(response));
+    });
+    Article.loadAll(JSON.parse(localStorage.rawData));
+    articleView.initIndexPage();
     // TODO: When we don't already have the rawData,
     // we need to retrieve the JSON file from the server with AJAX (which jQuery method is best for this?),
     // cache it in localStorage so we can skip the server call next time,
