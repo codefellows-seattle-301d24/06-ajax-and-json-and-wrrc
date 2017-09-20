@@ -1,6 +1,5 @@
 'use strict';
 
-let rawData = [];
 
 function Article (rawDataObj) {
   this.author = rawDataObj.author;
